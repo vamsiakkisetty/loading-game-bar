@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        .container{
+            width:500px;
+            height:300px;
+            text-align:center;
+            margin:auto;
+            border:1px solid red;
+            border-radius:10px;
+             box-shadow: 0px 0px 10px red;
+        }
+        .progress-box{
+            width:450px;
+            height:20px;
+            border:1px solid red;
+            margin:auto;
+            margin-top:50px;
+            border-radius: 10px;
+        }
+        .progress-bar{
+            width:0%;
+            height:100%;
+            background-color:rgb(238, 71, 16);
+            border-radius: 10px;
+        }
+        #startBtn,#resetBtn{
+            width:150px;
+            height:40px;
+            margin-top:20px;
+            background-color:rgb(38, 174, 59);
+            border-radius:10px;
+        }
+        #startBtn:hover,#resetBtn:hover{
+           transform: scale(1.1);
+        }
+
+        </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loading Bar</h1>
+        <div class="progress-box">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        <h3 id="percentage">0%</h3>
+        <h4>Ready to start</h4>
+        <button id="startBtn">Start the game </button>
+        <button id="resetBtn">Reset the game</button>
+    </div>
+<script>
+    $(document).ready(function(){
+        let value = 0;
+        let timer;
+        $("#startBtn").click(function(){
+            if(timer||value>=100){
+                return;
+            }
+            timer=setInterval(function(){
+                value+=1;
+                $("#progress").css("width", value + "%");
+                $("#percentage").text(value + "%");
+                if(value>=100){
+                    clearInterval(timer);
+                    timer=null;
+                }
+            }, 100)
+        });
+        $("#resetBtn").click(function(){
+            clearInterval(timer);
+            timer=null;
+            value=0;
+            $("#progress").css("width", value + "%");
+            $("#percentage").text(value + "%");
+        });
+
+
+    });
+</script>
+</body>
+</html>
